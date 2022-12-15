@@ -21,11 +21,13 @@ class EventsService {
     return event
   }
 
-  async update(eventId, eventData) {
+  async update(eventId, eventData, userId) {
     const original = await dbContext.Events.findById(eventId)
     if (!original) throw new BadRequest('no event at id:' + eventId)
+    if (original.creatorId != userId) throw new Forbidden("this event is not yours to change!")
 
     if (original.isCanceled == true) throw new BadRequest('event at id:' + eventId + 'has been canceled')
+
 
     original.name = eventData.name ? eventData.name : original.name
     original.description = eventData.description ? eventData.description : original.description
@@ -37,12 +39,10 @@ class EventsService {
     await original.save()
     return original
   }
-  async archive(eventId, userId) {
+  async cancel(eventId, userId) {
     const event = await this.getOne(eventId)
-    if (event.creatorId != userId) throw new Forbidden('not your album to archive')
-
+    if (event.creatorId != userId) throw new Forbidden('not your event to cancel')
     event.isCanceled = !event.isCanceled
-
     await event.save()
   }
 }

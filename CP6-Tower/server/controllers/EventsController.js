@@ -1,5 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+import { commentsService } from "../services/CommentsService.js";
 import { eventsService } from "../services/EventsService.js";
+import { ticketsService } from "../services/TicketsService.js";
 import BaseController from "../utils/BaseController.js";
 
 
@@ -10,10 +12,12 @@ export class EventsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getOne)
+      .get('/:id/comments', this.getCommentsInEvent)
+      .get('/:id/tickets', this.getTicketsForEvents)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
-      .put('/:eventId', this.update)
-      .delete('/:id', this.archive)
+      .put('/:id', this.update)
+      .delete('/:id', this.cancel)
   }
 
   async create(req, res, next) {
@@ -44,18 +48,36 @@ export class EventsController extends BaseController {
     }
   }
 
+  async getTicketsForEvents(req, res, next) {
+    try {
+      let tickets = await ticketsService.getTicketsForEvents(req.params.id)
+      return res.send(tickets)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getCommentsInEvent(req, res, next) {
+    try {
+      const comments = await commentsService.getAll({ eventId: req.params.id })
+      return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async update(req, res, next) {
     try {
-      const updated = await eventsService.update(req.params.eventId, req.body)
+      const updated = await eventsService.update(req.params.id, req.body, req.userInfo.id)
       return res.send(updated)
     } catch (error) {
       next(error)
     }
   }
 
-  async archive(req, res, next) {
+  async cancel(req, res, next) {
     try {
-      const message = await eventsService.archive(req.params.id, req.userInfo.id)
+      const message = await eventsService.cancel(req.params.id, req.userInfo.id)
       return res.send(message)
     } catch (error) {
       next(error)
