@@ -18,7 +18,10 @@ defineProps({
       <img :src="event.coverImg" alt="event picture" class="img-fluid card-img rounded-top">
       <div class="text-start fw-bold p-2">
         <div>{{ event.name }}</div>
-        <div>Spots Left: {{ event.capacity }}</div>
+        <div class="d-flex justify-content-between">
+          <div>Spots Left: {{ event.capacity }}</div>
+          <div v-if="event.isCanceled == true" class="text-danger"> Event Canceled! </div>
+        </div>
       </div>
     </div>
   </router-link>

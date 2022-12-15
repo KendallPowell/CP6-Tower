@@ -1,4 +1,14 @@
 <template>
+  <div class="container-fluid">
+    <div v-if="account.id && myTickets.length > 0" class="row">
+      <div class="col-12 p-2">
+        <div class="fw-bold fs-2">My Tickets!</div>
+      </div>
+      <div v-for="t in myTickets" class="col-12 col-md-3">
+        <EventCard :event="t.event" />
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 bg-info elevation-3 rounded d-flex justify-content-around p-2">
