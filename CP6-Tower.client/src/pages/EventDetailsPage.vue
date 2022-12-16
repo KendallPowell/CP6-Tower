@@ -19,13 +19,14 @@
           <div v-if="event.isCanceled == true" class="mt-5 p-1 text-danger fs-3 fw-bold">Event Has Been
             Canceled</div>
         </div>
+        <div v-if="event.creatorId == account.id" @click="cancelEvent(event.id)">
+          <button><i class="mdi mdi-cancel text-danger fw-bold fs-1"></i></button>
+        </div>
         <div class="bg-transparent rounded p-3 ms-3">
           <div class="row p-1">
             <h3 class="mb-5">Name: {{ event.name }} / Type: {{ event.type }}</h3>
             <h5 class="mb-2">Description: "{{ event.description }}""</h5>
           </div>
-        </div>
-        <div class="bg-transparent">
         </div>
       </div>
     </div>
@@ -54,7 +55,8 @@ import { ticketsService } from '../services/TicketsService';
 import { useRoute } from 'vue-router';
 import CommentForm from '../components/CommentForm.vue';
 export default {
-  setup() {
+  props: { event: { type: Event, required: true } },
+  setup(props) {
     const route = useRoute();
     async function getEventById() {
       try {
@@ -111,6 +113,14 @@ export default {
         catch (error) {
           logger.error(error);
           Pop.error(message.error);
+        }
+      },
+      async cancelEvent() {
+        try {
+          await eventsService.cancelEvent(props.event.id)
+        } catch (error) {
+          logger.log(error)
+          Pop.error(error.message)
         }
       },
       ComputeDate(date) {
