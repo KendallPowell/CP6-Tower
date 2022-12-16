@@ -11,6 +11,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
+        <button v-if="account.id" type="button" class="btn btn-success" data-bs-toggle="modal"
+          data-bs-target="#eventModal">
+          New Event <i class="mdi mdi-note-plus"></i>
+        </button>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
@@ -20,9 +24,13 @@
 
 <script>
 import Login from './Login.vue'
+import { computed } from 'vue';
+import { AppState } from '../AppState.js';
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account)
+    }
   },
   components: { Login }
 }
