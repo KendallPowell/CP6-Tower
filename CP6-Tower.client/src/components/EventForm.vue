@@ -35,8 +35,9 @@
           <option value="convention">Convention</option>
           <option value="sport">Sport</option>
         </select>
+        <label for="floatingSelect">Type of Event</label>
       </div>
-      <div class="form-floating mb-3 elevation-4">
+      <div class="form-floating mb-3 elevation-4 w-25">
         <input v-model="editable.startDate" required type="date">
       </div>
     </div>
@@ -66,7 +67,7 @@ export default {
         try {
           const event = await eventsService.createEvent(editable.value)
           editable.value = {}
-          Modal.getOrCreateInstance('#exampleModal').hide()
+          Modal.getOrCreateInstance('#eventModal').hide()
           router.push({ name: 'Event', params: { eventId: event.id } })
         } catch (error) {
           logger.log(error)

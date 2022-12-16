@@ -1,17 +1,3 @@
-<script setup>
-import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
-
-
-defineProps({
-  event: {
-    type: Object,
-    required: true
-  }
-})
-</script>
-
-
 <template>
   <router-link :to="{ name: 'Event', params: { eventId: event.id } }">
     <div class="elevation-6 rounded bg-info">
@@ -20,12 +6,27 @@ defineProps({
         <div>{{ event.name }}</div>
         <div class="d-flex justify-content-between">
           <div>Spots Left: {{ event.capacity }}</div>
-          <div v-if="event.isCanceled == true" class="text-danger"> Event Canceled! </div>
+          <div v-if="event.isCanceled == true" class="text-warning"> Event Canceled! </div>
         </div>
       </div>
     </div>
   </router-link>
 </template>
+
+
+<script>
+export default {
+  props: {
+    event: {
+      type: Object,
+      required: true
+    }
+  },
+  setup() {
+    return {}
+  }
+};
+</script>
 
 
 <style lang="scss" scoped>
