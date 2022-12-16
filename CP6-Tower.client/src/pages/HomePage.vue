@@ -4,7 +4,7 @@
       <div class="col-12 p-2">
         <div class="fw-bold fs-2">My Tickets!</div>
       </div>
-      <div v-for="t in myTickets" class="col-12 col-md-3">
+      <div v-for="t in myTickets" class="col-12 col-md-3 mb-4 p-3">
         <EventCard :event="t.event" />
       </div>
     </div>
