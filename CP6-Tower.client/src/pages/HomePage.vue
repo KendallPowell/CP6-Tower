@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 bg-info elevation-3 rounded d-flex justify-content-around p-2">
+      <div class="col-12 bg-info elevation-3 rounded d-flex justify-content-around p-2 mt-4">
+        <h3>Sort By:</h3>
         <button @click="filterBy = 'sport'" class="btn btn-success fw-bold">SPORTS</button>
         <button @click="filterBy = 'concert'" class="btn btn-success fw-bold">CONCERTS</button>
         <button @click="filterBy = 'convention'" class="btn btn-success fw-bold">CONVENTIONS</button>
@@ -10,7 +11,7 @@
       </div>
     </div>
     <div class="row my-4">
-      <div v-for="e in events" class="col-12 col-md-3 mb-2 p-2">
+      <div v-for="e in events" class="col-12 col-md-3 mb-2 p-2" title="go to event details page">
         <EventCard :event="e" />
       </div>
     </div>

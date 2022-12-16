@@ -30,7 +30,7 @@
       <div class="form-floating mb-3 elevation-4">
         <select v-model="editable.type" class="form-select" id="floatingSelect"
           aria-label="Floating label select example">
-          <option value="digital">Digital</option>
+          <option selected value="digital">Digital</option>
           <option value="concert">Concert</option>
           <option value="convention">Convention</option>
           <option value="sport">Sport</option>
@@ -43,7 +43,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Create Album</button>
+      <button type="submit" class="btn btn-primary">Create New Event</button>
     </div>
   </form>
 </template>

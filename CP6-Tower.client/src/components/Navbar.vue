@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center" title="Go to Home Page">
         <img alt="Tower logo" src="../assets/img/Logo.png" height="45" />
       </div>
     </router-link>
@@ -17,7 +17,7 @@
         </button>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Login />
+      <Login title="Open pop up Menu" />
     </div>
   </nav>
 </template>
