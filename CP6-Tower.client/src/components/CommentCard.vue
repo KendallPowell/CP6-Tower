@@ -6,7 +6,7 @@
     </div>
     <div class="col-6 text-end">
       <button v-if="comment.creatorId == account.id" @click="removeComment(comment.id)"
-        class="btn btn-danger delete-btn rounded-pill me-3">
+        class="btn btn-danger  delete-btn rounded-pill me-3" title="Delete this Comment?">
         <i class="mdi mdi-delete text-white fs-4"></i>
       </button>
     </div>

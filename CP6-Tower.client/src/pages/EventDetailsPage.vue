@@ -13,10 +13,12 @@
               <p v-else="event.capacity == 0" class="mb-4 p-1 ">No Spots Left</p>
             </div>
             <button v-if="event.isCanceled == false && !foundMe && event.capacity > 0" @click="createTicket()"
-              :disabled="event.capacity == 0" class="bg-transparent rounded mb-2 p-1 text-primary border-info">Get Your
+              :disabled="event.capacity == 0" class="bg-info rounded mb-2 p-1 text-white fw-bold border-info"
+              title="Get a ticket">Get Your
               Ticket Now!</button>
             <button v-else-if="event.isCanceled == false && foundMe" @click="removeTicket(foundMe.id)"
-              class="bg-transparent rounded mb-2 text-danger btn btn-outline-danger">Sell Your Ticket?</button>
+              class="rounded mb-2 text-white btn btn-danger" title="Get rid of ticket">Sell Your
+              Ticket?</button>
             <div v-else-if="event.capacity == 0" class="text-danger fw-bold">Sold out!</div>
             <div v-if="event.isCanceled == true" class="mt-5 p-1 text-danger fs-3 fw-bold">Event Has Been
               Canceled</div>
@@ -145,7 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 .back-cover-img {
-  height: 55vh;
+  height: 65vh;
   width: 100vw;
   background-size: cover;
   background-position: center;

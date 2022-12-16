@@ -30,7 +30,7 @@
       <div class="form-floating mb-3 elevation-4">
         <select v-model="editable.type" class="form-select" id="floatingSelect"
           aria-label="Floating label select example">
-          <option selected value="digital">Digital</option>
+          <option value="digital">Digital</option>
           <option value="concert">Concert</option>
           <option value="convention">Convention</option>
           <option value="sport">Sport</option>
@@ -59,7 +59,7 @@ import { Modal } from 'bootstrap';
 import { eventsService } from "../services/EventsService.js";
 export default {
   setup() {
-    const editable = ref({})
+    const editable = ref({ type: 'digital' })
     const router = useRouter()
     return {
       editable,
